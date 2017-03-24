@@ -2,7 +2,14 @@
 #
 # A sample custom service for CloudCenter.
 # This creates a Nginx webserver on Centos 6 or 7.
-# 
+#
+# This script creates yum REPO for nginx
+# Installs nginx from the vendors repo at nginx.org
+# Configures nginx to serve static content from /var/www/html
+# Downloads content from a user supplied github repo and places it in /var/www/html
+# Starts nginx
+# adjusts firewalld on CentOS 7/RHEL 7 to allow traffic on TCP ports 80 and 443 
+#
 # Authors - Adam Ordal, Ian Logan, Matthew Good 
 
 exec > >(tee -a /usr/local/osmosix/logs/nginx_$$.log) 2>&1
@@ -31,6 +38,15 @@ case $dist in
   ;;
 esac
 
+#
+# This uses a "here documenent"
+# cat <<EOF > /path/to/file
+# Everything until the letter E O F without the spaces will by copied into the file /path/to/file.
+# You can use any string of characters you want in place of E O F, just make sure its not a character
+# or string that will appear in your actual file.
+# EOF this content will also not appear in the file
+# This line will not appear in the file
+
 if [[ ! -f /etc/yum.repos.d/nginx.repo ]]
 then
   cat <<EOF >> /etc/yum.repos.d/nginx.repo
@@ -49,6 +65,10 @@ installNginx ()
   yum install -y nginx nginx-module-\* 2>&1 > /root/nginx_install.log
 }
 
+#The Cliqr repo by default has priority 1, highest priority.
+#The cliqr repo includes a much older version of nginx, so we temporarily lower the 
+#priority of the cliqr repo, install nginx from the vendor repo, and the restore the cliqr
+#repo priority
 lowerCliqrRepoPriority ()
 {
   #cliqr Repo
@@ -134,6 +154,7 @@ configureNginx ()
 FOE
 }
 
+#The environment variable cccGitHubRepoURL is defined in the service profile in Cloud Center
 deployContent ()
 {
   mkdir -p /var/www/html
@@ -167,6 +188,8 @@ openFirewallD ()
   firewall-cmd --add-service=http
   firewall-cmd --add-service=https
 }
+
+#Ensure git and lsb packages are installed.
 installGit
 installLSB
 
