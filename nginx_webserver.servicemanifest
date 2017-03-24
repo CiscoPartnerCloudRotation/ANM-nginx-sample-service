@@ -1,0 +1,127 @@
+{
+    "childServices": [], 
+    "perms": [
+        "write", 
+        "delete", 
+        "read", 
+        "administration"
+    ], 
+    "repositories": [], 
+    "egressRestrictions": [], 
+    "externalBundleLocation": "", 
+    "visible": true, 
+    "costPerHour": 0.0, 
+    "logoPath": "/assets/img/appTiers/nginx_webserver/logo.png", 
+    "systemService": false, 
+    "servicePorts": [], 
+    "parentServiceId": "48", 
+    "serviceType": "VM_AGENT", 
+    "description": "", 
+    "serviceParamSpecs": [
+        {
+            "systemParam": true, 
+            "collectionList": [], 
+            "displayName": "GitHub Repo URL for content", 
+            "pathSuffixValue": "", 
+            "userVisible": true, 
+            "confirmValue": null, 
+            "optional": false, 
+            "defaultValue": "", 
+            "webserviceListParams": null, 
+            "helpText": "", 
+            "userEditable": true, 
+            "valueList": null, 
+            "paramName": "cccGitHubRepoURL", 
+            "exampleValue": null, 
+            "dataUnit": null, 
+            "type": "string", 
+            "scope": null, 
+            "valueConstraint": {
+                "regex": null, 
+                "sizeValue": 0, 
+                "calloutWorkflowName": null, 
+                "maxValue": 0, 
+                "minValue": 0, 
+                "allowSpaces": true, 
+                "step": 0, 
+                "maxLength": 255
+            }
+        }
+    ], 
+    "images": [
+        {
+            "count": 7, 
+            "resource": "https://172.23.255.31/v1/tenants/6/images/21", 
+            "description": "CentOS 7.x", 
+            "internalImageName": "CloudWorker-CentOS7.x", 
+            "tags": [], 
+            "perms": [
+                "read"
+            ], 
+            "detail": null, 
+            "numOfNics": 1, 
+            "enabled": true, 
+            "osName": "LINUX", 
+            "visibility": "PUBLIC", 
+            "tenantId": 1, 
+            "systemImage": true, 
+            "id": "21", 
+            "imageType": "CLOUD_WORKER", 
+            "name": "CentOS 7.x"
+        }, 
+        {
+            "count": 6, 
+            "resource": "https://172.23.255.31/v1/tenants/6/images/4", 
+            "description": "CentOS 6.x", 
+            "internalImageName": "CloudWorker-CentOS6.x", 
+            "tags": [], 
+            "perms": [
+                "read"
+            ], 
+            "detail": null, 
+            "numOfNics": 1, 
+            "enabled": true, 
+            "osName": "LINUX", 
+            "visibility": "PUBLIC", 
+            "tenantId": 1, 
+            "systemImage": true, 
+            "id": "4", 
+            "imageType": "CLOUD_WORKER", 
+            "name": "CentOS 6.x"
+        }
+    ], 
+    "parentService": false, 
+    "bundleLocation": "", 
+    "defaultImageName": "CentOS 7.x", 
+    "displayName": "nginx-webserver", 
+    "name": "nginx_webserver", 
+    "externalService": false, 
+    "serviceActions": [
+        {
+            "actionName": "START", 
+            "actionValue": "https://raw.githubusercontent.com/ilogan-anm/ccc_rotation/master/service_nginx.sh start", 
+            "actionType": "URL"
+        }, 
+        {
+            "actionName": "STOP", 
+            "actionValue": "https://raw.githubusercontent.com/ilogan-anm/ccc_rotation/master/service_nginx.sh stop", 
+            "actionType": "URL"
+        }, 
+        {
+            "actionName": "RESTART", 
+            "actionValue": "https://raw.githubusercontent.com/ilogan-anm/ccc_rotation/master/service_nginx.sh restart", 
+            "actionType": "URL"
+        }, 
+        {
+            "actionName": "DEPLOY", 
+            "actionValue": "https://raw.githubusercontent.com/ilogan-anm/ccc_rotation/master/service_nginx.sh deploy", 
+            "actionType": "URL"
+        }, 
+        {
+            "actionName": "INSTALL", 
+            "actionValue": "https://raw.githubusercontent.com/ilogan-anm/ccc_rotation/master/service_nginx.sh install", 
+            "actionType": "URL"
+        }
+    ], 
+    "externalActions": []
+}
